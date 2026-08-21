@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import { Link } from "expo-router";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -10,6 +11,9 @@ export default function Index() {
       <Link href="/about" style={styles.button}>
         About
       </Link>
+      <View style={styles.footerContainer}>
+        <Button label="Press me" theme="primary"></Button>
+      </View>
     </View>
   );
 }
@@ -30,5 +34,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textDecorationLine: "underline",
     color: "#fff",
+  },
+  footerContainer: {
+    flex: 1 / 3,
+    alignItems: "center",
   },
 });
