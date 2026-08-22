@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import Card from "@/components/Card";
 import { StyleSheet, Text, View } from "react-native";
 
@@ -21,6 +22,7 @@ export default function Index() {
         <Text style={styles.text}>{formattedDate}</Text>
       </View>
       <Card title="Bro" icon="primary" />
+      <Button label="send today's log" theme="primary"></Button>
     </View>
   );
 }

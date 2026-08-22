@@ -9,12 +9,7 @@ type Props = {
 export default function Button({ label, theme }: Props) {
   if (theme === "primary") {
     return (
-      <View
-        style={[
-          styles.buttonContainer,
-          { borderWidth: 4, borderColor: "#ffd33d", borderRadius: 18 },
-        ]}
-      >
+      <View style={[styles.buttonContainer]}>
         <Pressable
           style={[styles.button, { backgroundColor: "#fff" }]}
           onPress={() => alert("You pressed a button.")}
@@ -25,7 +20,7 @@ export default function Button({ label, theme }: Props) {
           requests
           */}
           <FontAwesome
-            name="picture-o"
+            name="paper-plane"
             size={18}
             color="#25292e"
             style={styles.buttonIcon}
