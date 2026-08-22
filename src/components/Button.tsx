@@ -47,12 +47,13 @@ export default function Button({ label, theme }: Props) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    width: 320,
-    height: 68,
-    marginHorizontal: 20,
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    padding: 3,
+    padding: 16,
+    marginVertical: 6,
+    marginHorizontal: 16,
+    alignSelf: "stretch",
+    height: 76,
   },
   button: {
     borderRadius: 10,
@@ -68,5 +69,13 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: "#fff",
     fontSize: 16,
+    fontFamily: "monospace",
   },
 });
+
+// width: 320,
+// height: 68,
+// marginHorizontal: 20,
+// alignItems: "center",
+// justifyContent: "center",
+// padding: 3,
