@@ -19,6 +19,11 @@ export default function Button({ label, theme }: Props) {
           style={[styles.button, { backgroundColor: "#fff" }]}
           onPress={() => alert("You pressed a button.")}
         >
+          {/*ok so in order to shoot of reqs from here -->
+          set up a backend + server to take reqs and forward NOT to a deployed backend but my already deployed
+          backend on vercel for the other project. same backend structure but slightly different cause it just forwards
+          requests
+          */}
           <FontAwesome
             name="picture-o"
             size={18}
