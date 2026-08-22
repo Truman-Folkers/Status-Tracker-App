@@ -1,11 +1,11 @@
-import Button from "@/components/Button";
+import Card from "@/components/Card";
 import { StyleSheet, View } from "react-native";
 
 export default function Index() {
   return (
     <View style={styles.container}>
       <View style={styles.footerContainer}>
-        <Button label="Press me" theme="primary"></Button>
+        <Card title="Bro" icon="primary" />
       </View>
     </View>
   );
