@@ -1,9 +1,9 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcon from "@expo/vector-icons/MaterialIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
   title: string;
-  icon?: "primary";
+  icon?: "primary" | "health" | "bible" | "homework" | "gym";
 };
 
 export default function Card({ title, icon }: Props) {
@@ -11,7 +11,15 @@ export default function Card({ title, icon }: Props) {
     <View style={styles.container}>
       <View style={styles.icon}>
         {icon === "primary" ? (
-          <FontAwesome name="picture-o" size={18} color="#3ddc97" />
+          <MaterialIcon name="info-outline" size={18} color="#3ddc97" />
+        ) : icon === "health" ? (
+          <MaterialIcon name="health-and-safety" size={18} color="#3ddc97" />
+        ) : icon === "bible" ? (
+          <MaterialIcon name="menu-book" size={18} color="#3ddc97" />
+        ) : icon === "homework" ? (
+          <MaterialIcon name="library-books" size={18} color="#3ddc97" />
+        ) : icon === "gym" ? (
+          <MaterialIcon name="directions-run" size={18} color="#3ddc97" />
         ) : (
           ""
         )}
