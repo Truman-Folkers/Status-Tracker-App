@@ -38,23 +38,25 @@ export default function Index() {
       <View style={styles.header}>
         <Text style={styles.text}>{formattedDate}</Text>
       </View>
-      {Object.entries(groups).map(([name, items]) => (
-        <Card
-          key={name}
-          title={name}
-          icon={
-            name === "Bible Reading"
-              ? "bible"
-              : name === "Health"
-                ? "health"
-                : name === "Homework"
-                  ? "homework"
-                  : name === "Gym"
-                    ? "gym"
-                    : "primary"
-          }
-        />
-      ))}
+      <View style={styles.cardList}>
+        {Object.entries(groups).map(([name, items]) => (
+          <Card
+            key={name}
+            title={name}
+            icon={
+              name === "Bible Reading"
+                ? "bible"
+                : name === "Health"
+                  ? "health"
+                  : name === "Homework"
+                    ? "homework"
+                    : name === "Gym"
+                      ? "gym"
+                      : "primary"
+            }
+          />
+        ))}
+      </View>
       <Button label="send today's log" theme="primary"></Button>
     </View>
   );
@@ -82,6 +84,10 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     letterSpacing: 2,
     textTransform: "uppercase",
+  },
+  cardList: {
+    flex: 1,
+    width: "100%",
   },
   button: {
     fontSize: 20,
