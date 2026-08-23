@@ -1,10 +1,27 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { fetchStatuses } from "../api/post-statuses";
+
+export type status = {
+  name: string;
+  status: number;
+};
 
 export default function Index() {
-  //eventually grab a get req from server and map cards for
-  //each habit returned
+  const [statuses, setStatuses] = useState<status[]>([]);
+  useEffect(() => {
+    fetchStatuses().then(setStatuses);
+  }, []);
+
+  const groups = statuses.reduce<Record<string, status[]>>(
+    (accumulator, status) => {
+      (accumulator[status.name] ??= []).push(status);
+      return accumulator;
+    },
+    {},
+  );
 
   const today = new Date();
 
@@ -21,7 +38,23 @@ export default function Index() {
       <View style={styles.header}>
         <Text style={styles.text}>{formattedDate}</Text>
       </View>
-      <Card title="Bro" icon="primary" />
+      {Object.entries(groups).map(([name, items]) => (
+        <Card
+          key={name}
+          title={name}
+          icon={
+            name === "Bible Reading"
+              ? "bible"
+              : name === "Health"
+                ? "health"
+                : name === "Homework"
+                  ? "homework"
+                  : name === "Gym"
+                    ? "gym"
+                    : "primary"
+          }
+        />
+      ))}
       <Button label="send today's log" theme="primary"></Button>
     </View>
   );
