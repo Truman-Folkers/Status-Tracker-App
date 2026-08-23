@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Card from "@/components/Card";
+import { colors } from "@/constants/colors";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createStatus, fetchStatuses } from "../api/post-statuses";
@@ -87,7 +88,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#25292e",
+    backgroundColor: colors.paper,
     alignItems: "center",
     justifyContent: "flex-start",
   },
@@ -99,10 +100,10 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   text: {
-    fontSize: 16,
-    color: "#fff",
-    fontFamily: "monospace",
-    letterSpacing: 2,
+    fontSize: 15,
+    color: colors.green,
+    fontFamily: "Inter_900Black",
+    letterSpacing: 1,
     textTransform: "uppercase",
   },
   cardList: {
@@ -119,3 +120,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+//styling - toasts - mobile styling for web -  picture for web

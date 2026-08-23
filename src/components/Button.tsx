@@ -1,5 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colors } from "@/constants/colors";
 
 type Props = {
   label: string;
@@ -10,25 +11,32 @@ type Props = {
 export default function Button({ label, theme, onPress }: Props) {
   if (theme === "primary") {
     return (
-      <View style={[styles.buttonContainer]}>
+      <View style={styles.buttonContainer}>
         <Pressable
-          style={[styles.button, { backgroundColor: "#fff" }]}
+          style={({ pressed }) => [
+            styles.button,
+            pressed && { backgroundColor: colors.black },
+          ]}
           onPress={onPress}
         >
-          {/*ok so in order to shoot of reqs from here -->
-          set up a backend + server to take reqs and forward NOT to a deployed backend but my already deployed
-          backend on vercel for the other project. same backend structure but slightly different cause it just forwards
-          requests
-          */}
-          <FontAwesome
-            name="paper-plane"
-            size={18}
-            color="#25292e"
-            style={styles.buttonIcon}
-          />
-          <Text style={[styles.buttonLabel, { color: "#25292e" }]}>
-            {label}
-          </Text>
+          {({ pressed }) => (
+            <>
+              <FontAwesome
+                name="paper-plane"
+                size={18}
+                color={pressed ? colors.paper : colors.black}
+                style={styles.buttonIcon}
+              />
+              <Text
+                style={[
+                  styles.buttonLabel,
+                  { color: pressed ? colors.paper : colors.black },
+                ]}
+              >
+                {label}
+              </Text>
+            </>
+          )}
         </Pressable>
       </View>
     );
@@ -54,7 +62,10 @@ const styles = StyleSheet.create({
     height: 76,
   },
   button: {
-    borderRadius: 10,
+    borderRadius: 999,
+    borderWidth: 2,
+    borderColor: colors.black,
+    backgroundColor: colors.paper,
     width: "100%",
     height: "100%",
     alignItems: "center",
@@ -65,15 +76,8 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   buttonLabel: {
-    color: "#fff",
+    color: colors.black,
     fontSize: 16,
-    fontFamily: "monospace",
+    fontFamily: "Inter_800ExtraBold",
   },
 });
-
-// width: 320,
-// height: 68,
-// marginHorizontal: 20,
-// alignItems: "center",
-// justifyContent: "center",
-// padding: 3,
