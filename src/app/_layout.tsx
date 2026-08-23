@@ -33,7 +33,7 @@ export default function RootLayout() {
         <title>TF Status</title>
         <link
           rel="apple-touch-icon"
-          href={require("../assets/images/apple-touch-icon.png")}
+          href={require("../../assets/images/apple-touch-icon.png")}
         />
       </Head>
       <Stack>
