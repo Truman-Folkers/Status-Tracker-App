@@ -164,5 +164,3 @@ const styles = StyleSheet.create({
     paddingVertical: 12, // Keeps layout height uniform during switch
   },
 });
-
-//styling - toasts/after send cleaning - mobile styling for web -  picture for web
