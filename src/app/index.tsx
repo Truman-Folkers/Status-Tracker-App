@@ -14,10 +14,11 @@ export type status = {
 export default function Index() {
   const [statuses, setStatuses] = useState<status[]>([]);
   const [buttons, setButtons] = useState<any[]>([]);
+  const [submitted, setSubmitted] = useState(0);
 
   useEffect(() => {
     fetchStatuses().then(setStatuses);
-  }, []);
+  }, [submitted]);
 
   const handleButton = (b: any) => {
     setButtons((prevList) => {
@@ -26,16 +27,17 @@ export default function Index() {
     });
   };
 
-  const createStatuses = () => {
-    for (let i = 0; i < buttons.length; i++) {
-      try {
-        createStatus(buttons[i].status, buttons[i].name);
-        triggerToast(true);
-      } catch (e) {
-        triggerToast(false);
-      }
+  const createStatuses = async () => {
+    if (buttons.length === 0) return;
+    try {
+      await Promise.all(buttons.map((b) => createStatus(b.status, b.name)));
+      triggerToast(true);
+      setButtons([]);
+
+      setSubmitted((s) => s + 1);
+    } catch (e) {
+      triggerToast(false);
     }
-    setButtons([]);
   };
 
   const groups = statuses.reduce<Record<string, status[]>>(
