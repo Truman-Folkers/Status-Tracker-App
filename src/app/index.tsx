@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import { colors } from "@/constants/colors";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import Toast from "react-native-toast-message";
 import { createStatus, fetchStatuses } from "../api/post-statuses";
 
@@ -15,6 +15,7 @@ export default function Index() {
   const [statuses, setStatuses] = useState<status[]>([]);
   const [buttons, setButtons] = useState<any[]>([]);
   const [submitted, setSubmitted] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     fetchStatuses().then(setStatuses);
@@ -28,7 +29,8 @@ export default function Index() {
   };
 
   const createStatuses = async () => {
-    if (buttons.length === 0) return;
+    if (buttons.length === 0 || isSubmitting) return;
+    setIsSubmitting(true);
     try {
       await Promise.all(buttons.map((b) => createStatus(b.status, b.name)));
       triggerToast(true);
@@ -37,6 +39,8 @@ export default function Index() {
       setSubmitted((s) => s + 1);
     } catch (e) {
       triggerToast(false);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -100,11 +104,21 @@ export default function Index() {
           />
         ))}
       </View>
-      <Button
-        label="send today's log"
-        theme="primary"
-        onPress={() => createStatuses()}
-      ></Button>
+      <View style={styles.footerContainer}>
+        {isSubmitting ? (
+          <ActivityIndicator
+            size="small"
+            color={colors.green}
+            style={styles.loader}
+          />
+        ) : (
+          <Button
+            label="send today's log"
+            theme="primary"
+            onPress={createStatuses}
+          />
+        )}
+      </View>
     </View>
   );
 }
@@ -140,8 +154,13 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   footerContainer: {
-    flex: 1 / 3,
+    width: "100%",
+    paddingVertical: 20,
+    justifyContent: "center",
     alignItems: "center",
+  },
+  loader: {
+    paddingVertical: 12, // Keeps layout height uniform during switch
   },
 });
 
