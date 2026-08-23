@@ -89,6 +89,7 @@ export default function Index() {
             key={name}
             title={name}
             name={name}
+            submitted={submitted}
             icon={
               name === "Bible Reading"
                 ? "bible"

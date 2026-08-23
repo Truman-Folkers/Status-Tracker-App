@@ -1,21 +1,33 @@
+import { colors } from "@/constants/colors";
 import MaterialIcon from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { colors } from "@/constants/colors";
 
 type Props = {
   title: string;
   icon?: "primary" | "health" | "bible" | "homework" | "gym";
   name: string;
   onSendData: (b: any) => void;
+  submitted: number;
 };
 
-export default function Card({ title, icon, onSendData, name }: Props) {
+export default function Card({
+  title,
+  icon,
+  name,
+  onSendData,
+  submitted,
+}: Props) {
   const [isPressed, setIsPressed] = useState<0 | 1 | 2 | 3>(0);
 
   useEffect(() => {
     onSendData({ status: isPressed, name });
   }, [isPressed]);
+
+  useEffect(() => {
+    setIsPressed(0);
+  }, [submitted]);
+
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
@@ -30,17 +42,9 @@ export default function Card({ title, icon, onSendData, name }: Props) {
         ) : icon === "bible" ? (
           <MaterialIcon name="menu-book" size={18} color={colors.green} />
         ) : icon === "homework" ? (
-          <MaterialIcon
-            name="library-books"
-            size={18}
-            color={colors.green}
-          />
+          <MaterialIcon name="library-books" size={18} color={colors.green} />
         ) : icon === "gym" ? (
-          <MaterialIcon
-            name="directions-run"
-            size={18}
-            color={colors.green}
-          />
+          <MaterialIcon name="directions-run" size={18} color={colors.green} />
         ) : (
           ""
         )}
