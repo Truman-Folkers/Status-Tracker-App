@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//styling - toasts - mobile styling for web -  picture for web
+//styling - toasts/after send cleaning - mobile styling for web -  picture for web
