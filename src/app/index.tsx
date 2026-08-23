@@ -3,6 +3,7 @@ import Card from "@/components/Card";
 import { colors } from "@/constants/colors";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Toast from "react-native-toast-message";
 import { createStatus, fetchStatuses } from "../api/post-statuses";
 
 export type status = {
@@ -27,7 +28,12 @@ export default function Index() {
 
   const createStatuses = () => {
     for (let i = 0; i < buttons.length; i++) {
-      createStatus(buttons[i].status, buttons[i].name);
+      try {
+        createStatus(buttons[i].status, buttons[i].name);
+        triggerToast(true);
+      } catch (e) {
+        triggerToast(false);
+      }
     }
     setButtons([]);
   };
@@ -39,6 +45,22 @@ export default function Index() {
     },
     {},
   );
+
+  const triggerToast = (s: boolean) => {
+    if (s) {
+      Toast.show({
+        type: "success",
+        text1: "Successfully submitted log",
+        position: "top",
+      });
+    } else {
+      Toast.show({
+        type: "error",
+        text1: "Failed - check your internet connection",
+        position: "top",
+      });
+    }
+  };
 
   const today = new Date();
 
