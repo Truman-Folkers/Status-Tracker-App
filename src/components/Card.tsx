@@ -1,12 +1,14 @@
 import MaterialIcon from "@expo/vector-icons/MaterialIcons";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { createStatus } from "../api/post-statuses";
 
 type Props = {
   title: string;
   icon?: "primary" | "health" | "bible" | "homework" | "gym";
+  name: string;
 };
 
-export default function Card({ title, icon }: Props) {
+export default function Card({ title, icon, name }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.icon}>
@@ -26,22 +28,13 @@ export default function Card({ title, icon }: Props) {
       </View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.buttonContainer}>
-        <Pressable
-          style={styles.button}
-          onPress={() => alert("You pressed a button.")}
-        >
+        <Pressable style={styles.button} onPress={() => createStatus(1, name)}>
           <Text style={styles.buttonLabel}>1</Text>
         </Pressable>
-        <Pressable
-          style={styles.button}
-          onPress={() => alert("You pressed a button.")}
-        >
+        <Pressable style={styles.button} onPress={() => createStatus(2, name)}>
           <Text style={styles.buttonLabel}>2</Text>
         </Pressable>
-        <Pressable
-          style={styles.button}
-          onPress={() => alert("You pressed a button.")}
-        >
+        <Pressable style={styles.button} onPress={() => createStatus(3, name)}>
           <Text style={styles.buttonLabel}>3</Text>
         </Pressable>
       </View>

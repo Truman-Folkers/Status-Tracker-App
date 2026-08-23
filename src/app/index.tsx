@@ -43,6 +43,7 @@ export default function Index() {
           <Card
             key={name}
             title={name}
+            name={name}
             icon={
               name === "Bible Reading"
                 ? "bible"
