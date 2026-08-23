@@ -4,7 +4,7 @@
     "slug": "StatusTracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/apple-touch-icon.png",
     "scheme": "statustracker",
     "userInterfaceStyle": "automatic",
     "ios": {
@@ -28,8 +28,8 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
-          "image": "./assets/images/splash-icon.png",
+          "backgroundColor": "#303030",
+          "image": "./assets/images/apple-touch-icon.png",
           "imageWidth": 76
         }
       ]
