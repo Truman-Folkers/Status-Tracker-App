@@ -9,6 +9,12 @@ export type status = {
   status: number;
 };
 
+function createStatuses() {
+  for (let i = 0; i < statuses.length; i++) {
+    createStatus(1, name);
+  }
+}
+
 export default function Index() {
   const [statuses, setStatuses] = useState<status[]>([]);
   useEffect(() => {
@@ -76,8 +82,6 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     paddingHorizontal: 20,
     paddingBottom: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(255,255,255,0.1)",
   },
   text: {
     fontSize: 16,
