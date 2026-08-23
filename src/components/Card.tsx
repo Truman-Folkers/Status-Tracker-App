@@ -10,59 +10,70 @@ type Props = {
   onSendData: (b: any) => void;
 };
 
-const ACCENTS = {
-  primary: { color: colors.orange, soft: colors.orangeSoft },
-  gym: { color: colors.orange, soft: colors.orangeSoft },
-  health: { color: colors.green, soft: colors.greenSoft },
-  bible: { color: colors.blue, soft: colors.blueSoft },
-  homework: { color: colors.yellow, soft: colors.yellowSoft },
-} as const;
-
 export default function Card({ title, icon, onSendData, name }: Props) {
   const [isPressed, setIsPressed] = useState<0 | 1 | 2 | 3>(0);
 
   useEffect(() => {
     onSendData({ status: isPressed, name });
   }, [isPressed]);
-
-  const accent = ACCENTS[icon ?? "primary"];
-  const iconName =
-    icon === "health"
-      ? "health-and-safety"
-      : icon === "bible"
-        ? "menu-book"
-        : icon === "homework"
-          ? "library-books"
-          : icon === "gym"
-            ? "directions-run"
-            : "info-outline";
-
   return (
     <View style={styles.container}>
-      <View style={[styles.icon, { backgroundColor: accent.soft }]}>
-        <MaterialIcon name={iconName} size={18} color={accent.color} />
+      <View style={styles.icon}>
+        {icon === "primary" ? (
+          <MaterialIcon name="info-outline" size={18} color={colors.green} />
+        ) : icon === "health" ? (
+          <MaterialIcon
+            name="health-and-safety"
+            size={18}
+            color={colors.green}
+          />
+        ) : icon === "bible" ? (
+          <MaterialIcon name="menu-book" size={18} color={colors.green} />
+        ) : icon === "homework" ? (
+          <MaterialIcon
+            name="library-books"
+            size={18}
+            color={colors.green}
+          />
+        ) : icon === "gym" ? (
+          <MaterialIcon
+            name="directions-run"
+            size={18}
+            color={colors.green}
+          />
+        ) : (
+          ""
+        )}
       </View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.buttonContainer}>
-        {([1, 2, 3] as const).map((n) => (
-          <Pressable
-            key={n}
-            style={[
-              styles.button,
-              isPressed === n ? styles.buttonSelected : null,
-            ]}
-            onPress={() => (isPressed !== n ? setIsPressed(n) : setIsPressed(0))}
-          >
-            <Text
-              style={[
-                styles.buttonLabel,
-                isPressed === n ? styles.buttonLabelSelected : null,
-              ]}
-            >
-              {n}
-            </Text>
-          </Pressable>
-        ))}
+        <Pressable
+          style={[
+            styles.button,
+            { backgroundColor: isPressed === 1 ? colors.green : colors.paper },
+          ]}
+          onPress={() => (isPressed !== 1 ? setIsPressed(1) : setIsPressed(0))}
+        >
+          <Text style={styles.buttonLabel}>1</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.button,
+            { backgroundColor: isPressed === 2 ? colors.green : colors.paper },
+          ]}
+          onPress={() => (isPressed !== 2 ? setIsPressed(2) : setIsPressed(0))}
+        >
+          <Text style={styles.buttonLabel}>2</Text>
+        </Pressable>
+        <Pressable
+          style={[
+            styles.button,
+            { backgroundColor: isPressed === 3 ? colors.green : colors.paper },
+          ]}
+          onPress={() => (isPressed !== 3 ? setIsPressed(3) : setIsPressed(0))}
+        >
+          <Text style={styles.buttonLabel}>3</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -98,6 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 2,
     borderColor: colors.black,
+    backgroundColor: colors.greenSoft,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 14,
@@ -112,19 +124,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     borderColor: colors.black,
-    backgroundColor: colors.paper,
     alignItems: "center",
     justifyContent: "center",
-  },
-  buttonSelected: {
-    backgroundColor: colors.black,
   },
   buttonLabel: {
     color: colors.black,
     fontSize: 14,
     fontFamily: "Inter_800ExtraBold",
-  },
-  buttonLabelSelected: {
-    color: colors.paper,
   },
 });

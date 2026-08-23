@@ -13,30 +13,18 @@ export default function Button({ label, theme, onPress }: Props) {
     return (
       <View style={styles.buttonContainer}>
         <Pressable
-          style={({ pressed }) => [
-            styles.button,
-            pressed && { backgroundColor: colors.black },
-          ]}
+          style={[styles.button, { backgroundColor: colors.paper }]}
           onPress={onPress}
         >
-          {({ pressed }) => (
-            <>
-              <FontAwesome
-                name="paper-plane"
-                size={18}
-                color={pressed ? colors.paper : colors.black}
-                style={styles.buttonIcon}
-              />
-              <Text
-                style={[
-                  styles.buttonLabel,
-                  { color: pressed ? colors.paper : colors.black },
-                ]}
-              >
-                {label}
-              </Text>
-            </>
-          )}
+          <FontAwesome
+            name="paper-plane"
+            size={18}
+            color={colors.black}
+            style={styles.buttonIcon}
+          />
+          <Text style={[styles.buttonLabel, { color: colors.black }]}>
+            {label}
+          </Text>
         </Pressable>
       </View>
     );
@@ -65,7 +53,6 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     borderWidth: 2,
     borderColor: colors.black,
-    backgroundColor: colors.paper,
     width: "100%",
     height: "100%",
     alignItems: "center",
