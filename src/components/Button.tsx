@@ -13,7 +13,7 @@ export default function Button({ label, theme, onPress }: Props) {
       <View style={[styles.buttonContainer]}>
         <Pressable
           style={[styles.button, { backgroundColor: "#fff" }]}
-          onPress={() => alert("You pressed a button.")}
+          onPress={onPress}
         >
           {/*ok so in order to shoot of reqs from here -->
           set up a backend + server to take reqs and forward NOT to a deployed backend but my already deployed

@@ -1,15 +1,20 @@
 import MaterialIcon from "@expo/vector-icons/MaterialIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type Props = {
   title: string;
   icon?: "primary" | "health" | "bible" | "homework" | "gym";
   name: string;
+  onSendData: (b: any) => void;
 };
 
-export default function Card({ title, icon, name }: Props) {
+export default function Card({ title, icon, onSendData, name }: Props) {
   const [isPressed, setIsPressed] = useState<0 | 1 | 2 | 3>(0);
+
+  useEffect(() => {
+    onSendData({ status: isPressed, name });
+  }, [isPressed]);
   return (
     <View style={styles.container}>
       <View style={styles.icon}>

@@ -2,24 +2,34 @@ import Button from "@/components/Button";
 import Card from "@/components/Card";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { fetchStatuses } from "../api/post-statuses";
+import { createStatus, fetchStatuses } from "../api/post-statuses";
 
 export type status = {
   name: string;
   status: number;
 };
 
-function createStatuses() {
-  for (let i = 0; i < statuses.length; i++) {
-    createStatus(1, name);
-  }
-}
-
 export default function Index() {
   const [statuses, setStatuses] = useState<status[]>([]);
+  const [buttons, setButtons] = useState<any[]>([]);
+
   useEffect(() => {
     fetchStatuses().then(setStatuses);
   }, []);
+
+  const handleButton = (b: any) => {
+    setButtons((prevList) => {
+      const others = prevList.filter((item) => item.name !== b.name);
+      return b.status === 0 ? others : [...others, b];
+    });
+  };
+
+  const createStatuses = () => {
+    for (let i = 0; i < buttons.length; i++) {
+      createStatus(buttons[i].status, buttons[i].name);
+    }
+    setButtons([]);
+  };
 
   const groups = statuses.reduce<Record<string, status[]>>(
     (accumulator, status) => {
@@ -61,10 +71,15 @@ export default function Index() {
                       ? "gym"
                       : "primary"
             }
+            onSendData={handleButton}
           />
         ))}
       </View>
-      <Button label="send today's log" theme="primary"></Button>
+      <Button
+        label="send today's log"
+        theme="primary"
+        onPress={() => createStatuses()}
+      ></Button>
     </View>
   );
 }
